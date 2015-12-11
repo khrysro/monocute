@@ -1,25 +1,26 @@
 # - coding: utf-8 -
 #
-# Copyright (C) 2009 Alejandro Ayuso 
+# portado por KhrysRo
 #
-# This file is part of the Monocaffe Connection Manager
+# This file is part of the Monocute Connection Manager
 #
-# Monocaffe Connection Manager is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# Monocute Connection Manager is free software: you can redistribute
+# it and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 2 of the
+# License, or (at your option) any later version.
 #
-# Monocaffe Connection Manager is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Monocute Connection Manager is distributed in the hope that it will
+# be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with the Monocaffe Connection Manager.  If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License along
+# with the Monocute Connection Manager. If not, see
+# <http://www.gnu.org/licenses/>.
 #
 
 '''
-This is the main script for mcm
+This is the main script for mccm
 '''
 import os
 import sys
@@ -28,12 +29,12 @@ import logging
 from optparse import OptionParser
 
 from tables import Table
-from mcm.common.connections import *
-from mcm.common.utils import *
-from mcm.common.constants import *
+from mccm.common.connections import *
+from mccm.common.utils import *
+from mccm.common.constants import *
 
 
-class Mcm(object):
+class mccm(object):
     def __init__(self):
         self.dialog_binary = '/usr/bin/dialog'
         self.dao = Dao()
@@ -51,8 +52,9 @@ class Mcm(object):
             conn = self.connections[alias]
             self.do_connect(conn)
         except KeyError:
+
             print ("Error loading connections." )
-            print ("Please add one or more connections using \"mcm -a\"")
+            print ("Please add one or more connections using \"mccm -a\"")
             exit(1)
 
     def delete(self, alias):
@@ -63,7 +65,7 @@ class Mcm(object):
             print("Unknown alias " + alias)
 
     def export_html(self, path):
-        from mcm.common.export import Html
+        from mccm.common.export import Html
         html = Html(path, constants.version, self.dao.read_xml()) 
         html.export()
 
@@ -71,8 +73,10 @@ class Mcm(object):
         cx = None
         if cxs == None:
             try:
+
                 print ("Adding a new alias. Follow instructions")
                 print ("Type of server (ssh, vnc, rdp, telnet, ftp) [default: SSH]:")
+
                 cx_type = raw_input()
                 cx_type = cx_type.upper()
                 if len(cx_type) <= 0:
@@ -81,12 +85,15 @@ class Mcm(object):
                 if cx_type != 'SSH' and cx_type != 'VNC' and cx_type != 'RDP' and cx_type != 'TELNET' and cx_type != 'FTP':
                     raise TypeError("Unknown server type: " + cx_type)
 
+
                 print ("Alias for this connection:")
+
                 cx_alias = raw_input()
                 if self.connections != None:
                     if self.connections.has_key(cx_alias):
                         raise TypeError("This alias is already used. Try with another one")
                     
+
 
                 print ("Hostname or IP Address:")
                 cx_host = raw_input()
@@ -101,9 +108,11 @@ class Mcm(object):
                 cx_port = raw_input()
 
                 print ("Group:")
+
                 cx_group = raw_input()
                 if len(cx_group) <= 0:
                     cx_group = None
+
 
                 print ("Options:")
                 cx_options = raw_input()
@@ -124,7 +133,9 @@ class Mcm(object):
                 if len(d) != 10:
                     raise TypeError("Not a parseable Connection List")
                 if self.connections.has_key(alias):
+
                     print ("Not saving %s" % alias)
+
                     continue
                 cx = connections_factory(get_last_id(self.connections), d['type'], d['user'], d['host'], alias, d['password'], d['port'], d['group'], d['options'], d['description'])
                 self.connections[alias] = cx
@@ -135,7 +146,9 @@ class Mcm(object):
 
 
     def list(self, alias=None):
-        print ("Usage: mcm [OPTIONS] [ALIAS]\n")
+
+        print ("Usage: mccm [OPTIONS] [ALIAS]\n")
+
         t_headers = ['Alias', 'user', 'host', 'port']
         t_rows = []
         _ids = []
@@ -153,8 +166,10 @@ class Mcm(object):
         exit(0)
 
     def long_list(self):
+
         print ('-'*80)
         print ("Full list of connections")
+
         (sshs, vncs, rdps, tels, ftps) = ([], [], [], [], [])
         for conn in self.connections.values():
             cx_type = conn.__class__.__name__.upper()
@@ -187,9 +202,11 @@ class Mcm(object):
             self.list()
 
     def long_print_conn(self, type, connections):
+
         print ('-'*80)
         print (type)
         print ('-'*80)
+
         if len(connections) == 0:
             return
         t_headers = ['Alias', 'user', 'host', 'port', 'Password','Options', 'Description']
@@ -217,7 +234,7 @@ class Mcm(object):
             conn = self.connections[key]
             dialog.append(key)
             dialog.append(conn.dialog_string())
-        fhandlr = open('/tmp/mcm_ans', 'w+')
+        fhandlr = open('/tmp/mccm_ans', 'w+')
         try:
             #print dialog
             res = subprocess.call(dialog, stderr=fhandlr)
@@ -236,7 +253,7 @@ class Mcm(object):
         exit(0)
 
     def import_csv(self, path):
-        from mcm.common.utils import Csv
+        from mccm.common.utils import Csv
         _csv = Csv(path)
         cxs = _csv.do_import()
         self.add(cxs)
@@ -259,10 +276,10 @@ if __name__ == '__main__':
     #(export, drop) = os.path.split(export)
     #sys.path.insert(0, export)
 
-    mcmt = Mcm()
+    mccmt = mccm()
 
     if not options.list and not options.add and not options.alias and not options.html and not options.csv and len(args) < 1:
-        mcmt.show_menu()
+        mccmt.show_menu()
 
     # I want only one option at a time
     if options.add and (options.list or options.alias or options.html or options.csv):
@@ -272,19 +289,19 @@ if __name__ == '__main__':
         parser.error("Only one option at a time")
 
     if options.add:
-        mcmt.add()
+        mccmt.add()
 
     if options.list:
-        mcmt.long_list()
+        mccmt.long_list()
 
     if options.alias:
-        mcmt.delete(options.alias)
+        mccmt.delete(options.alias)
 
     if options.html:
-        mcmt.export_html(options.html)
+        mccmt.export_html(options.html)
 
     if options.csv:
-        mcmt.import_csv(options.csv)
+        mccmt.import_csv(options.csv)
 
     if len(args) > 0:
-        mcmt.connect(args[0])
+        mccmt.connect(args[0])

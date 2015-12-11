@@ -1,13 +1,13 @@
-Copyright © Alejandro Ayuso 2009
 
-Monocaffe Connections Manager (mcm)
 
-Description: Manage connections to servers from the console or GNOME
- Monocaffe Connections Manager allows you to manage your list of
+Monocute Connections Manager (mccm)
+
+Description: Manage connections to servers from the console or GUI
+ Monocute Connections Manager allows you to manage your list of
  servers you usually connect to. Provided is a terminal version and
- a GNOME version which is a very complete terminal emulator like
+ a version which is a very complete terminal emulator like
  gnome-terminal with the additions of ease to connect to ssh, vnc,
- rdp, ftp and telnet servers. Also, mcm-gtk provides the optional
+ rdp, ftp and telnet servers. Also, mcm-qt provides the optional
  usage of cluster commands. With this you can connect to many servers
  and issue commands on all of them.
 

@@ -3,9 +3,9 @@
 # Creates the Structure for a deb
 
 rm -rf /tmp/pack
-mkdir -p /tmp/pack/usr/share/apps/mcm
+mkdir -p /tmp/pack/usr/share/apps/mccm
 mkdir -p /tmp/pack/DEBIAN
-cp -R ../* /tmp/pack/usr/share/apps/mcm
+cp -R ../* /tmp/pack/usr/share/apps/mccm
 cp debian/* /tmp/pack/DEBIAN/
 
 cd /tmp/

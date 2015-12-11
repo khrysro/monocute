@@ -1,6 +1,6 @@
 # - coding: utf-8 -
 #
-# portado por KhrysRo
+# 
 #
 # This file is part of the Monocute Connection Manager
 #
@@ -17,4 +17,4 @@
 # You should have received a copy of the GNU General Public License along
 # with the Monocute Connection Manager. If not, see
 # <http://www.gnu.org/licenses/>.
-
+#

@@ -21,6 +21,7 @@ mkdir -p ${install_dir} 2>/dev/null
 cp -R * ${install_dir} 2>/dev/null
 
 echo "2/3 Creating symlinks"
+
 ln -s ${mcm_shell}  /usr/bin/mccm
 ln -s ${mcm_shell}  /usr/bin/mccm-qt
 
@@ -30,5 +31,6 @@ cp /usr/share/apps/mccm/qt/mccm.desktop /usr/share/applications/
 
 echo "Done. Monocute Connections Manager is ready"
 echo "Type mccm on a console or run mcm-qt from the Menu"
+
 
 exit 0

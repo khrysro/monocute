@@ -3,7 +3,7 @@
 # Uploads a PPA package to Launchpad
 
 tmp_ppa_dir="/tmp/ppa"
-artefact="mcm_0.9.4"
+artefact="mccm_0.0.1"
 
 if [ -d ${tmp_ppa_dir} ]; then
     rm -rf /tmp/ppa
@@ -26,4 +26,4 @@ debuild -S -sd
 
 cd ../
 
-dput monocaffe-ppa ${artefact}-0ubuntu1_source.changes 
+dput monocute-ppa ${artefact}-0ubuntu1_source.changes 

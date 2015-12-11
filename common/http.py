@@ -1,21 +1,21 @@
 # - coding: utf-8 -
 #
-# Copyright (C) 2009 Alejandro Ayuso
+# portado por KhrysRo
 #
-# This file is part of the Monocaffe Connection Manager
+# This file is part of the Monocute Connection Manager
 #
-# Monocaffe Connection Manager is free software: you can redistribute
+# Monocute Connection Manager is free software: you can redistribute
 # it and/or modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation, either version 3 of the
+# as published by the Free Software Foundation, either version 2 of the
 # License, or (at your option) any later version.
 #
-# Monocaffe Connection Manager is distributed in the hope that it will
+# Monocute Connection Manager is distributed in the hope that it will
 # be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along
-# with the Monocaffe Connection Manager. If not, see
+# with the Monocute Connection Manager. If not, see
 # <http://www.gnu.org/licenses/>.
 #
 
@@ -24,7 +24,7 @@ import BaseHTTPServer
 import SimpleHTTPServer
 import os
 
-class McmHttpServerThread(threading.Thread):
+class MccmHttpServerThread(threading.Thread):
     def __init__(self, path, port=8000):
         threading.Thread.__init__(self)
         self.path = path
@@ -46,11 +46,15 @@ class McmHttpServerThread(threading.Thread):
 
 if __name__ == '__main__':
     import time
-    x = McmHttpServerThread("/tmp")
+    x = MccmHttpServerThread("/tmp")
     x.start()
     i = 0
     while i < 10:
+<<<<<<< HEAD
         print ("Hola")
+=======
+        print "Hola"
+>>>>>>> 8b5052b832fed10909b9901bacee0d407e16cf84
         time.sleep(2)
         i += 1
     x.stop()

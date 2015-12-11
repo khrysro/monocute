@@ -1,30 +1,31 @@
 # - coding: utf-8 -
 #
-# Copyright (C) 2009 Alejandro Ayuso 
+# portado por KhrysRo
 #
-# This file is part of the Monocaffe Connection Manager
+# This file is part of the Monocute Connection Manager
 #
-# Monocaffe Connection Manager is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# Monocute Connection Manager is free software: you can redistribute
+# it and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 2 of the
+# License, or (at your option) any later version.
 #
-# Monocaffe Connection Manager is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Monocute Connection Manager is distributed in the hope that it will
+# be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+# of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with the Monocaffe Connection Manager.  If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License along
+# with the Monocute Connection Manager. If not, see
+# <http://www.gnu.org/licenses/>.
 #
 
 '''
-Script to add new connections to mcm
+Script to add new connections to mccm
 '''
 
 from optparse import OptionParser
-from mcm.common.connections import *
-from mcm.common.utils import *
+from mccm.common.connections import *
+from mccm.common.utils import *
 
 if __name__ == '__main__':
     parser = OptionParser(usage="%prog -a ALIAS -t [SSH|TELNET|FTP|RDP|VNC] -g GROUP -u USER -p PASSWORD -P PORT -H HOST -o OPTIONS -d DESCRIPTION\nexample:\n %prog -a test -g test_grp -o \"-X -L\"", version="%prog 0.9")

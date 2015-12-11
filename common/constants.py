@@ -1,21 +1,21 @@
 # - coding: utf-8 -
 #
-# Copyright (C) 2009 Alejandro Ayuso
+# portado por KhrysRo
 #
-# This file is part of the Monocaffe Connection Manager
+# This file is part of the Monocute Connection Manager
 #
-# Monocaffe Connection Manager is free software: you can redistribute
+# Monocute Connection Manager is free software: you can redistribute
 # it and/or modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation, either version 3 of the
+# as published by the Free Software Foundation, either version 2 of the
 # License, or (at your option) any later version.
 #
-# Monocaffe Connection Manager is distributed in the hope that it will
+# Monocute Connection Manager is distributed in the hope that it will
 # be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along
-# with the Monocaffe Connection Manager. If not, see
+# with the Monocute Connection Manager. If not, see
 # <http://www.gnu.org/licenses/>.
 #
 
@@ -31,17 +31,17 @@ import locale
 from xdg.BaseDirectory import *
 
 version = '0.9.3'
-app_name = "Monocaffe Connections Manager"
+app_name = "Monocute Connections Manager"
 
 home = os.getenv("HOME")
-mcm_config_dir = os.path.join(xdg_config_home, 'mcm')
-mcm_data_dir = os.path.join(xdg_data_home, 'mcm')
+mccm_config_dir = os.path.join(xdg_config_home, 'mccm')
+mccm_data_dir = os.path.join(xdg_data_home, 'mccm')
 glade_home = os.path.realpath(os.path.dirname(sys.argv[0]))
-icon_file = os.path.join(glade_home, "mcm_icon.png")
-tips_file = os.path.join(mcm_data_dir, "tips.json")
-conf_file = os.path.join(mcm_config_dir, "mcm.conf")
-cxs_file = os.path.join(mcm_data_dir, "mcm.xml")
-error_dialog = os.path.join(glade_home, "mcm-error-dialog.py")
+icon_file = os.path.join(glade_home, "mccm_icon.png")
+tips_file = os.path.join(mccm_data_dir, "tips.json")
+conf_file = os.path.join(mccm_config_dir, "mccm.conf")
+cxs_file = os.path.join(mccm_data_dir, "mccm.xml")
+error_dialog = os.path.join(glade_home, "mccm-error-dialog.py")
 
 # New Glade Files for GtkBuilder
 glade_home = os.path.join(glade_home, "glade")
@@ -72,19 +72,19 @@ def get_languages():
     return _langs
 
 local_path = "%s/../i18n/locale/" % os.path.realpath(os.path.dirname(sys.argv[0]))
-gettext.install('mcm', local_path)
-gettext.bindtextdomain('mcm', local_path)
-gettext.textdomain('mcm')
+gettext.install('mccm', local_path)
+gettext.bindtextdomain('mccm', local_path)
+gettext.textdomain('mccm')
 langs = get_languages()
 
-lang = gettext.translation('mcm', local_path, languages=langs, fallback=True)
+lang = gettext.translation('mccm', local_path, languages=langs, fallback=True)
 _ = lang.ugettext
 
 # ----------------------------------------------------------------------
 # i18n stuff
 # ----------------------------------------------------------------------
 
-window_title = "Monocaffe Connections Manager - %s"
+window_title = "Monocute Connections Manager - %s"
 
 send_world = _("Send to the World")
 google_docs_disclaimer = _("""If you select the option to send \
@@ -108,8 +108,8 @@ google_search_url = "http://www.google.com/search?q=%s"
 google_feedback_form_url = "http://spreadsheets.google.com/\
 viewform?formkey=dDhDWE9KRktEZWdHekNvMmhFcnVaQ3c6MQ"
 
-mcm_help_url = "http://sites.google.com/site/monocaffe/home/mcm/help"
-tips_url = "http://launchpad.net/mcm/trunk/mcm/+download/tips.json"
+mccm_help_url = "http://sites.google.com/site/Monocute/home/mccm/help"
+tips_url = "http://launchpad.net/mccm/trunk/mccm/+download/tips.json"
 
 tip_error = _("Not a Tip Object")
 
@@ -146,7 +146,7 @@ import_not_saving = _("Not saving %s\n")
 import_saving = _("Saved %s\n")
 cluster_checkbox_tooltip = _("Set For Clustered Commands")
 
-quit_warning = _("Quitting Monocaffe Connections Manager")
+quit_warning = _("Quitting Monocute Connections Manager")
 
 connection_error = _("An error has ocurred, please check the output on the terminal for more information")
 

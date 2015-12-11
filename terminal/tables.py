@@ -1,5 +1,5 @@
 # This code is from bob_f in #python at FreeNode
-# Thanks!
+# 
 """
 Small library for making plain text tables
 """

@@ -142,21 +142,37 @@ def scan_tree(pathname, calls=['_']):
 
 def run():
     if len(sys.argv) != 4:
+<<<<<<< HEAD
         print ('usage: %s <basefolder> <name> <version>' % sys.argv[0])
         sys.exit()
     print (PO_HEADER % {
+=======
+        print 'usage: %s <basefolder> <name> <version>' % sys.argv[0]
+        sys.exit()
+    print PO_HEADER % {
+>>>>>>> 8b5052b832fed10909b9901bacee0d407e16cf84
         'time':     datetime.now(),
         'filename': sys.argv[0],
         'name':     sys.argv[2],
         'version':  sys.argv[3]
+<<<<<<< HEAD
     })
+=======
+    }
+>>>>>>> 8b5052b832fed10909b9901bacee0d407e16cf84
     basepath = sys.argv[1]
     for string, occurrences in scan_tree(basepath):
         print
         for path, lineno in occurrences:
+<<<<<<< HEAD
             print ('#. file %r, line %s' % (path, lineno or '?'))
         print ('msgid %s' % quote(string))
         print ('msgstr ""')
+=======
+            print '#. file %r, line %s' % (path, lineno or '?')
+        print 'msgid %s' % quote(string)
+        print 'msgstr ""'
+>>>>>>> 8b5052b832fed10909b9901bacee0d407e16cf84
 
 
 if __name__ == '__main__':

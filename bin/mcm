@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+ 
 #  
 #
 # This file is part of the monocute Connection Manager
@@ -15,6 +16,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
+ 
 # along with the monocute Connection Manager.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Introduction
@@ -30,6 +32,7 @@
 # This basically depends on which of this programs can be called from the command line without
 # too much trouble. Also, very basic options will be used, so if you want more complex options
 # like mount usb drives for rdesktop, or sound for VNC, use the proper utilities for this or
+ 
 # modify mccm.
 #
 # Configuration
@@ -41,6 +44,7 @@
 # before.
 #
 
+ 
 inst_dir="/usr/share/apps/mccm"
 qt_dir="${inst_dir}/qt/"
 binary=$( basename ${0} )
@@ -49,6 +53,7 @@ old_pythonpath=${PYTHONPATH}
 xdg_data="${HOME}/.local/share/"
 xdg_config="${HOME}/.config/"
 
+ 
 mccm_data="${xdg_data}mccm"
 mccm_config="${xdg_config}mccm"
 
@@ -68,10 +73,12 @@ if [ ! -d "${mccm_config}" ] ; then
     echo "Copying default configuration to ${mccm_config}"
     mkdir ${mccm_config}
     cp ${src_config_file} ${mccm_config}
+
 fi
 
 # Even if the directories exists, we might be missing some files
 
+ 
 if [ ! -f "${mccm_data}/tips.json" ]; then
     cp ${src_tips_file} ${mccm_data}
 fi
@@ -82,25 +89,30 @@ fi
 
 if [ ! -f "${mccm_config}/mccm.conf" ]; then
     cp ${src_config_file} ${mccm_conf}
+
 fi
 
 # In case this is the first time the app is being run after an update
 # of a release which doesn't use XDG, I'll move the old files to their
 # new locations
 
+ 
 if [ -d "${HOME}/.mccm" ] ; then
     mv "${HOME}/.mccm/mccm.conf" ${mccm_config}
     mv "${HOME}/.mccm/mccm.xml" ${mccm_data}
     mv "${HOME}/.mccm/tips.json" ${mccm_data}
     rmdir "${HOME}/.mccm"
+
 fi
 
 export PYTHONPATH="/usr/share/apps/"
 
+ 
 if [ "${binary}" == "mccm" ] ; then
     /usr/bin/python ${inst_dir}/terminal/mccm-terminal.py ${@}
 else
     /usr/bin/python ${inst_dir}/qt/mccm-qt.py &
+
 fi
 
 export PYTHONPATH="${old_pythonpath}"

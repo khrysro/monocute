@@ -441,8 +441,8 @@ def message(text):
     """Print a message."""
     # print >> sys.stderr, options.prog + ': ' + text
     # print >> sys.stderr, text
-    print (text)
 
+    print (text)
 
 def find_checks(argument_name):
     """
@@ -586,10 +586,12 @@ class Checker:
         self.previous_indent_level = self.indent_level
         self.indent_level = expand_indent(indent)
         if options.verbose >= 2:
+
             print (self.logical_line[:80].rstrip())
         for name, check, argument_names in self.logical_checks:
             if options.verbose >= 3:
                 print ('   ', name)
+
             result = self.run_check(check, argument_names)
             if result is not None:
                 offset, text = result
@@ -769,6 +771,7 @@ def get_statistics(prefix=''):
 def print_statistics(prefix=''):
     """Print overall statistics (number of errors and warnings)."""
     for line in get_statistics(prefix):
+
         print (line)
 
 
@@ -776,11 +779,13 @@ def print_benchmark(elapsed):
     """
     Print benchmark numbers.
     """
+
     print ('%-7.2f %s' % (elapsed, 'seconds elapsed'))
     keys = ['directories', 'files',
             'logical lines', 'physical lines']
     for key in keys:
         if key in options.counters:
+
             print ('%-7d %s per second (%d total)' % (
                 options.counters[key] / elapsed, key,
                 options.counters[key]))
