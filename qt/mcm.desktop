@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=MCCM
+Comment=Monocaffe Connections Manager
+Exec=/usr/bin/mccm-qt
+Icon=mccm
+Terminal=false
+Type=Application
+Categories=Application;QT;Network;

@@ -1,0 +1,106 @@
+#!/bin/bash
+#
+#  
+#
+# This file is part of the monocute Connection Manager
+#
+# monocute Connection Manager is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# monocute Connection Manager is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with the monocute Connection Manager.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Introduction
+#
+# The monocute Connection Manager is created to ease the management of connections to different
+# servers a sysadmin usuarlly connect to. I'm aiming to provide support for:
+# -ssh
+# -telnet
+# -vnc
+# -rdesktop
+# -ICA (Citrix) TO DO
+#
+# This basically depends on which of this programs can be called from the command line without
+# too much trouble. Also, very basic options will be used, so if you want more complex options
+# like mount usb drives for rdesktop, or sound for VNC, use the proper utilities for this or
+# modify mccm.
+#
+# Configuration
+# mccm comes configured for Ubuntu (my platform) but basically, all you need to modify in case one
+# of the commands isn't found, is the file connections.py. There you'll find the global tuples where
+# the paths to the clients are specified. You can change them freely.
+#
+# Also, if you preffer to change any of them to be the first, do so modifying the tuples mentioned
+# before.
+#
+
+inst_dir="/usr/share/apps/mccm"
+qt_dir="${inst_dir}/qt/"
+binary=$( basename ${0} )
+old_pythonpath=${PYTHONPATH}
+
+xdg_data="${HOME}/.local/share/"
+xdg_config="${HOME}/.config/"
+
+mccm_data="${xdg_data}mccm"
+mccm_config="${xdg_config}mccm"
+
+src_config_file="${inst_dir}/doc/mccm.conf"
+src_tips_file="${inst_dir}/doc/tips.json"
+src_cxs_file="${inst_dir}/doc/mccm.xml"
+
+# Test for first run
+if [ ! -d "${mccm_data}" ] ; then
+    echo "Copying default data files to ${mccm_data}"
+    mkdir ${mccm_data}
+    cp ${src_tips_file}   ${mccm_data} 
+    cp ${src_cxs_file}    ${mccm_data}
+fi
+
+if [ ! -d "${mccm_config}" ] ; then
+    echo "Copying default configuration to ${mccm_config}"
+    mkdir ${mccm_config}
+    cp ${src_config_file} ${mccm_config}
+fi
+
+# Even if the directories exists, we might be missing some files
+
+if [ ! -f "${mccm_data}/tips.json" ]; then
+    cp ${src_tips_file} ${mccm_data}
+fi
+
+if [ ! -f "${mccm_data}/mccm.xml" ]; then
+    cp ${src_cxs_file} ${mccm_data}
+fi
+
+if [ ! -f "${mccm_config}/mccm.conf" ]; then
+    cp ${src_config_file} ${mccm_conf}
+fi
+
+# In case this is the first time the app is being run after an update
+# of a release which doesn't use XDG, I'll move the old files to their
+# new locations
+
+if [ -d "${HOME}/.mccm" ] ; then
+    mv "${HOME}/.mccm/mccm.conf" ${mccm_config}
+    mv "${HOME}/.mccm/mccm.xml" ${mccm_data}
+    mv "${HOME}/.mccm/tips.json" ${mccm_data}
+    rmdir "${HOME}/.mccm"
+fi
+
+export PYTHONPATH="/usr/share/apps/"
+
+if [ "${binary}" == "mccm" ] ; then
+    /usr/bin/python ${inst_dir}/terminal/mccm-terminal.py ${@}
+else
+    /usr/bin/python ${inst_dir}/qt/mccm-qt.py &
+fi
+
+export PYTHONPATH="${old_pythonpath}"
