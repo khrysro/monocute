@@ -31,7 +31,7 @@
            <item>
             <widget class="QGroupBox" name="groupBox">
              <property name="title">
-              <string>GroupBox</string>
+              <string>Connections</string>
              </property>
              <widget class="QScrollArea" name="scrollArea">
               <property name="geometry">
@@ -184,7 +184,7 @@
          <widget class="QTabWidget" name="tabWidget">
           <widget class="QWidget" name="tab_15">
            <attribute name="title">
-            <string>Tab 1</string>
+            <string>Start</string>
            </attribute>
           </widget>
           <widget class="QWidget" name="tab_16">
@@ -193,6 +193,9 @@
            </attribute>
           </widget>
          </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="cluster_entry"/>
         </item>
        </layout>
       </item>
