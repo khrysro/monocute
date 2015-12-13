@@ -1,2 +1,10 @@
-<RCC/>
-
+<RCC>
+    <qresource prefix="/Image">
+        <file>images/mccm_icon.png</file>
+        <file>images/mccm_icon.xpm</file>
+        <file>images/Monocute_web.png</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file>images/Monocute_web.png</file>
+    </qresource>
+</RCC>
