@@ -13,15 +13,15 @@ if [ -z $userpriv ]
     exit 1
 fi
 
-install_dir="/usr/share/apps/mcm"
+install_dir="/usr/share/apps/mccm"
 
-echo "1/3 Removing from GNOME Menu"
-rm -f /usr/share/pixmaps/mcm.xpm
-rm -f /usr/share/applications/mcm.desktop
+echo "1/3 Removing from Menu"
+rm -f /usr/share/pixmaps/mccm.xpm
+rm -f /usr/share/applications/mccm.desktop
 
 echo "2/3 Removing Symlinks"
-rm -f /usr/bin/mcm
-rm -f /usr/bin/mcm-gtk
+rm -f /usr/bin/mccm
+rm -f /usr/bin/mccm-qt
 
-echo "3/3 Removing mcm"
+echo "3/3 Removing mccm"
 rm -rf ${install_dir}
