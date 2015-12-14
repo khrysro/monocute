@@ -105,7 +105,7 @@ color: #339;
         <th scope=\"col\">Options</th>
         <th scope=\"col\">Group</th>
         <th scope=\"col\">Description</th></tr></thead><tbody> """
-        for cx in list(self.connections.values()):
+        for cx in self.connections.values():
             content += cx.get_html_tr() + "\n"
         content += "</tbody></table>"
         return content
@@ -130,5 +130,5 @@ class ExportCsv(object):
         writer = csv.writer(open(out_file, 'wb'), dialect='mcm')
         writer.writerow(['alias', 'type', 'id', 'host', 'port', 'user',\
                         'password', 'options', 'group', 'description'])
-        for cx in list(connections.values()):
+        for cx in connections.values():
             writer.writerow(cx.to_list())

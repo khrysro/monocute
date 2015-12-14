@@ -221,7 +221,7 @@ cx_password, cx_port, cx_group, cx_options, cx_desc):
 
 def groups(connections):
     groups = []
-    for cx in list(connections.values()):
+    for cx in connections.values():
         if cx.group not in groups:
             groups.append(cx.group)
     return groups
