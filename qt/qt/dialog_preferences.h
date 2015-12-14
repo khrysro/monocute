@@ -15,6 +15,9 @@ public:
     explicit dialog_preferences(QWidget *parent = 0);
     ~dialog_preferences();
 
+private slots:
+    void on_font_colorbutton_clicked();
+
 private:
     Ui::dialog_preferences *ui;
 };

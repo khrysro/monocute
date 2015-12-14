@@ -12,3 +12,8 @@ dialog_preferences::~dialog_preferences()
 {
     delete ui;
 }
+
+void dialog_preferences::on_font_colorbutton_clicked()
+{
+
+}
