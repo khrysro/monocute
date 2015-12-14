@@ -5,7 +5,6 @@
 #
 # This script is based on the one of pyjama.
 #
-
 # Clever way of testing for root
 userpriv=$(test -w \/ && echo "ok")
 if [ -z $userpriv ]
@@ -13,8 +12,8 @@ if [ -z $userpriv ]
     exit 1
 fi
 
-install_dir="/usr/share/apps/mcm"
-mcm_shell="/usr/share/apps/mcm/bin/mcm"
+install_dir="/usr/share/apps/mccm"
+mcm_shell="/usr/share/apps/mccm/bin/mccm"
 
 echo "1/3 Copying files to ${install_dir}"
 mkdir -p ${install_dir} 2>/dev/null
