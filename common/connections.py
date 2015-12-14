@@ -20,8 +20,10 @@
 #
 
 import os
-from configurations import McmConfig
-from constants import *
+#from common.configurations import mccmConfig
+#from configurations import mccmConfig
+#from constants import *
+from common.constants import *
 
 class Connection(object):
 
@@ -56,7 +58,7 @@ class Connection(object):
         tstr = "Connecting: "
         for i in args:
             tstr += i + " "
-        print tstr
+        print (tstr)
 
     def get_type(self):
         return self.__class__.__name__.upper()
@@ -212,7 +214,7 @@ cx_password, cx_port, cx_group, cx_options, cx_desc):
 
         return cx
 
-    except TypeError, err:
+    except TypeError as err:
         print(err)
         exit(1)
 

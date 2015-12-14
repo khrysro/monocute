@@ -30,7 +30,7 @@ import gettext
 import locale
 from xdg.BaseDirectory import *
 
-version = '0.9.3'
+version = '0.0.1'
 app_name = "Monocute Connections Manager"
 
 home = os.getenv("HOME")
@@ -78,7 +78,7 @@ gettext.textdomain('mccm')
 langs = get_languages()
 
 lang = gettext.translation('mccm', local_path, languages=langs, fallback=True)
-_ = lang.ugettext
+_ = lang.lgettext
 
 # ----------------------------------------------------------------------
 # i18n stuff

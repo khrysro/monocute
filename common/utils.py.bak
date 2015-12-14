@@ -26,23 +26,23 @@ file where connections get saved
 
 import os
 import shutil
-import xml
+#import xml
 import csv
 import json
-import urllib.request, urllib.parse, urllib.error
-import urllib.request, urllib.error, urllib.parse
+import urllib
+import urllib2
 from xml.dom import minidom
 from xml.dom.minidom import Document
-from io import StringIO
+from StringIO import StringIO
 from datetime import date
-from .connections import *
-from . import constants
+from connections import *
+import constants
 
 def get_last_id(connections):
     a_list = []
     _max = 0
     try:
-        for conn in list(connections.values()):
+        for conn in connections.values():
             a_list.append(int(conn.id))
         _max = max(a_list)
     except ValueError:
@@ -71,7 +71,7 @@ class Dao(object):
             for cx in connections:
                 cx_node = doc.createElement('connection')
                 cx_node.setAttribute('protocol', cx.__class__.__name__.upper())
-                for (k, v) in list(cx.to_dict().items()):
+                for (k, v) in cx.to_dict().items():
                     cx_id = doc.createElement(k)
                     cx_id_val = doc.createTextNode(str(v))
                     cx_id.appendChild(cx_id_val)
@@ -157,9 +157,9 @@ class GoogleForm(object):
                     "pageNumber": "0",
                     "backupCache": ""}
 
-        data = urllib.parse.urlencode(values)
-        req = urllib.request.Request(self.url, data)
-        response = urllib.request.urlopen(req)
+        data = urllib.urlencode(values)
+        req = urllib2.Request(self.url, data)
+        response = urllib2.urlopen(req)
         page = response.read()
         # page is a str that if everything is ok is the "thanks!" html
         # which is 1234 characters long. Could be bigger, depending on the
@@ -209,7 +209,7 @@ class TipsEncoder(json.JSONEncoder):
     def default(self, clazz):
         if not isinstance(clazz, Tip):
 
-            print((constants.tip_error))
+            print (constants.tip_error)
 
             return
         else:
@@ -274,7 +274,7 @@ class Tips(object):
 
         try:
             if not filename:
-                sock = urllib.request.urlopen(constants.tips_url)
+                sock = urllib.urlopen(constants.tips_url)
                 raw = StringIO(sock.read())
                 update_from = "web"
             else:
