@@ -72,5 +72,5 @@ if __name__ == '__main__':
             dlg.draw()
 
     else:
-        print ("unkown %s" % app)
+        print(("unkown %s" % app))
         exit(exit_code)

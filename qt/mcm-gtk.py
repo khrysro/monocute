@@ -40,8 +40,8 @@ from mcm.common.export import *
 from mcm.common.utils import *
 import mcm.common.constants
 
-from widgets import *
-from mcmvnc import McmVncClient
+from .widgets import *
+from .mcmvnc import McmVncClient
 
 for module in glade, gettext:
     module.bindtextdomain('mcm', constants.local_path)
@@ -71,7 +71,7 @@ class McmGtk(object):
 
     def add_event(self, widget):
         id = self.get_last_id()
-        dlg = AddConnectionDialog(id, self.connections.keys(), groups(self.connections), types(self.connections))
+        dlg = AddConnectionDialog(id, list(self.connections.keys()), groups(self.connections), types(self.connections))
         dlg.run()
         if dlg.response == gtk.RESPONSE_OK:
             cx = dlg.new_connection
@@ -125,7 +125,7 @@ class McmGtk(object):
                 term = scroll.get_child()
                 cluster_tabs[i] = term
 
-        for term in cluster_tabs.values():
+        for term in list(cluster_tabs.values()):
             term.feed_child(key)
         return True
 
@@ -248,7 +248,7 @@ class McmGtk(object):
             return False
 
     def do_popup_connections_menu(self, widget, event):
-        print "Click!"
+        print("Click!")
         return False
 
     def do_copy(self, widget, var2=None, var3=None, var4=None):
@@ -354,19 +354,19 @@ class McmGtk(object):
         tree.set_model(tree_store)
 
         groups = set()
-        for cx in self.connections.values():
+        for cx in list(self.connections.values()):
             groups.add(cx.group)
 
         for grp in groups:
             grp_node = tree_store.append(None, [grp, None])
-            for cx in self.connections.values():
+            for cx in list(self.connections.values()):
                 if grp == cx.group:
                     tree_store.append(grp_node, [cx.alias, None])
 
     def edit_event(self, widget):
         id = self.get_last_id()
         alias = self.get_tree_selection()
-        dlg = AddConnectionDialog(id, self.connections.keys(), groups(self.connections), types(self.connections), self.connections[alias])
+        dlg = AddConnectionDialog(id, list(self.connections.keys()), groups(self.connections), types(self.connections), self.connections[alias])
         dlg.run()
         if dlg.response == gtk.RESPONSE_OK:
             cx = dlg.new_connection
@@ -616,7 +616,7 @@ class McmGtk(object):
 
     def on_status_icon_popup(self, status, button, time):
         cx_menu = self.widgets['connections_menu']
-        for k in self.connections.keys():
+        for k in list(self.connections.keys()):
             cx_item = gtk.MenuItem(k)
             cx_item.props.name = k
             cx_item.connect('activate', self.connect_event)
@@ -636,13 +636,13 @@ class McmGtk(object):
         dlg = UtilityDialogs()
         response = dlg.show_question_dialog(constants.quit_warning, constants.are_you_sure)
         if response == gtk.RESPONSE_OK:
-            self.dao.save_to_xml(self.connections.values())
+            self.dao.save_to_xml(list(self.connections.values()))
             exit(0)
         else:
             return False
 
     def save_event(self, widget):
-        self.dao.save_to_xml(self.connections.values())  
+        self.dao.save_to_xml(list(self.connections.values()))  
 
     def switch_tab(self, accel_group, window, keyval, modifier):
         # Key 0 is 48, Key 1 is 49 ... key 9 is 57

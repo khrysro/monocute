@@ -25,7 +25,7 @@ import gtkvnc
 from time import strftime
 
 from mcm.common.constants import *
-from widgets import UtilityDialogs
+from .widgets import UtilityDialogs
 
 class McmVncClient(object):
     def __init__(self, host, port):
@@ -84,7 +84,7 @@ class McmVncClient(object):
         return self.layout
 
     def vnc_connected(self, widget):
-        print "Connected to server"
+        print("Connected to server")
 
     def send_caf1(self, menuitem):
         self.vnc.send_keys(["Control_L", "Alt_L", "F1"])

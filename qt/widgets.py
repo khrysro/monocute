@@ -639,7 +639,7 @@ class McmTipsWidget(object):
     def entry_icon_event(self, widget, icon, event):
         # Using 'event.button' I can know which mouse button was used
         if icon.value_name == "GTK_ENTRY_ICON_PRIMARY":
-            print "To Console"
+            print("To Console")
         elif icon.value_name == "GTK_ENTRY_ICON_SECONDARY":
             new_tip_dialog = McmNewTipDialog()
             new_tip_dialog.run()
@@ -822,7 +822,7 @@ class ManageConnectionsDialog(object):
         store = gtk.ListStore(str, str, str, str, str, str, str, str, str, str, gtk.gdk.Pixbuf)
         img = self.dialog.render_icon(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
 
-        for cx in self.connections.values():
+        for cx in list(self.connections.values()):
             cx_list = cx.to_list()
             cx_list.append(img)
             store.append(cx_list)
