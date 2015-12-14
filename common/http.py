@@ -50,11 +50,9 @@ if __name__ == '__main__':
     x.start()
     i = 0
     while i < 10:
-<<<<<<< HEAD
+
         print ("Hola")
-=======
-        print "Hola"
->>>>>>> 8b5052b832fed10909b9901bacee0d407e16cf84
+
         time.sleep(2)
         i += 1
     x.stop()
