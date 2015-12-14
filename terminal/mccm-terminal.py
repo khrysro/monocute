@@ -18,10 +18,9 @@
 # with the Monocute Connection Manager. If not, see
 # <http://www.gnu.org/licenses/>.
 #
+#
+# This is the main script for mccm
 
-'''
-This is the main script for mccm
-'''
 import os
 import sys
 import subprocess
@@ -29,12 +28,17 @@ import logging
 from optparse import OptionParser
 
 from tables import Table
+
+from common.connections import *
+from common.utils import *
+from common.constants import *
+'''
 from mccm.common.connections import *
 from mccm.common.utils import *
 from mccm.common.constants import *
+'''
 
-
-class mccm(object):
+class Mccm(object):
     def __init__(self):
         self.dialog_binary = '/usr/bin/dialog'
         self.dao = Dao()
@@ -52,9 +56,8 @@ class mccm(object):
             conn = self.connections[alias]
             self.do_connect(conn)
         except KeyError:
-
-            print ("Error loading connections." )
-            print ("Please add one or more connections using \"mccm -a\"")
+            print("Error loading connections.") 
+            print("Please add one or more connections using \"mccm -a\"")
             exit(1)
 
     def delete(self, alias):
@@ -73,11 +76,9 @@ class mccm(object):
         cx = None
         if cxs == None:
             try:
-
-                print ("Adding a new alias. Follow instructions")
-                print ("Type of server (ssh, vnc, rdp, telnet, ftp) [default: SSH]:")
-
-                cx_type = raw_input()
+                print("Adding a new alias. Follow instructions")
+                print("Type of server (ssh, vnc, rdp, telnet, ftp) [default: SSH]:")
+                cx_type = input()
                 cx_type = cx_type.upper()
                 if len(cx_type) <= 0:
                     cx_type = 'SSH'
@@ -85,40 +86,35 @@ class mccm(object):
                 if cx_type != 'SSH' and cx_type != 'VNC' and cx_type != 'RDP' and cx_type != 'TELNET' and cx_type != 'FTP':
                     raise TypeError("Unknown server type: " + cx_type)
 
-
-                print ("Alias for this connection:")
-
-                cx_alias = raw_input()
+                print("Alias for this connection:")
+                cx_alias = input()
                 if self.connections != None:
-                    if self.connections.has_key(cx_alias):
+                    if cx_alias in self.connections:
                         raise TypeError("This alias is already used. Try with another one")
                     
 
+                print("Hostname or IP Address:")
+                cx_host = input()
 
-                print ("Hostname or IP Address:")
-                cx_host = raw_input()
+                print("Username:")
+                cx_user = input()
 
-                print ("Username:")
-                cx_user = raw_input()
+                print("Password:")
+                cx_password = input()
 
-                print ("Password:")
-                cx_password = raw_input()
+                print("Port:")
+                cx_port = input()
 
-                print ("Port:")
-                cx_port = raw_input()
-
-                print ("Group:")
-
-                cx_group = raw_input()
+                print("Group:")
+                cx_group = input()
                 if len(cx_group) <= 0:
                     cx_group = None
 
-
-                print ("Options:")
-                cx_options = raw_input()
+                print("Options:")
+                cx_options = input()
 
                 print("Description:")
-                cx_desc = raw_input()
+                cx_desc = input()
 
                 cx = connections_factory(get_last_id(self.connections), cx_type, cx_user, cx_host, cx_alias, cx_password, cx_port, cx_group, cx_options, cx_desc)
                 self.connections[cx_alias] = cx
@@ -132,10 +128,8 @@ class mccm(object):
                 alias = d['alias'].strip()
                 if len(d) != 10:
                     raise TypeError("Not a parseable Connection List")
-                if self.connections.has_key(alias):
-
-                    print ("Not saving %s" % alias)
-
+                if alias in self.connections:
+                    print("Not saving %s" % alias)
                     continue
                 cx = connections_factory(get_last_id(self.connections), d['type'], d['user'], d['host'], alias, d['password'], d['port'], d['group'], d['options'], d['description'])
                 self.connections[alias] = cx
@@ -146,18 +140,16 @@ class mccm(object):
 
 
     def list(self, alias=None):
-
-        print ("Usage: mccm [OPTIONS] [ALIAS]\n")
-
+        print("Usage: mccm [OPTIONS] [ALIAS]\n")
         t_headers = ['Alias', 'user', 'host', 'port']
         t_rows = []
         _ids = []
-        for conn in self.connections.values():
+        for conn in list(self.connections.values()):
             _ids.append(int(conn.id))
         
         _ids.sort()
         for _id in _ids:
-            for conn in self.connections.values():
+            for conn in list(self.connections.values()):
                 if conn.id == str(_id):
                     t_rows.append((conn.alias, conn.user, conn.host, conn.port))
 
@@ -166,12 +158,10 @@ class mccm(object):
         exit(0)
 
     def long_list(self):
-
-        print ('-'*80)
-        print ("Full list of connections")
-
+        print('-'*80)
+        print("Full list of connections")
         (sshs, vncs, rdps, tels, ftps) = ([], [], [], [], [])
-        for conn in self.connections.values():
+        for conn in list(self.connections.values()):
             cx_type = conn.__class__.__name__.upper()
             if cx_type == 'SSH':
                 sshs.append(conn)
@@ -202,11 +192,9 @@ class mccm(object):
             self.list()
 
     def long_print_conn(self, type, connections):
-
-        print ('-'*80)
-        print (type)
-        print ('-'*80)
-
+        print('-'*80)
+        print(type)
+        print('-'*80)
         if len(connections) == 0:
             return
         t_headers = ['Alias', 'user', 'host', 'port', 'Password','Options', 'Description']
@@ -228,7 +216,7 @@ class mccm(object):
         dialog = [
                 self.dialog_binary, '--backtitle', 'Monocaffe Connections Manager ' + constants.version, '--clear', '--menu', '"Choose an Alias to connect to"', '0', '150', menu_size
                 ]
-        keys = self.connections.keys()
+        keys = list(self.connections.keys())
         keys.sort()
         for key in keys:
             conn = self.connections[key]
@@ -249,7 +237,7 @@ class mccm(object):
         return aliases[0]
 
     def save_and_exit(self):
-        self.dao.save_to_xml(self.connections.values())
+        self.dao.save_to_xml(list(self.connections.values()))
         exit(0)
 
     def import_csv(self, path):
@@ -276,7 +264,7 @@ if __name__ == '__main__':
     #(export, drop) = os.path.split(export)
     #sys.path.insert(0, export)
 
-    mccmt = mccm()
+    mccmt = Mccm()
 
     if not options.list and not options.add and not options.alias and not options.html and not options.csv and len(args) < 1:
         mccmt.show_menu()

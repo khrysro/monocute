@@ -45,7 +45,7 @@
 #
 
  
-inst_dir="/usr/share/apps/mccm"
+inst_dir="/usr/lib/mccm"
 qt_dir="${inst_dir}/qt/"
 binary=$( basename ${0} )
 old_pythonpath=${PYTHONPATH}
@@ -105,7 +105,7 @@ if [ -d "${HOME}/.mccm" ] ; then
 
 fi
 
-export PYTHONPATH="/usr/share/apps/"
+export PYTHONPATH="/usr/share/"
 
  
 if [ "${binary}" == "mccm" ] ; then
