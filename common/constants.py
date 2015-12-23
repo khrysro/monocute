@@ -36,23 +36,23 @@ app_name = "Monocute Connections Manager"
 home = os.getenv("HOME")
 mccm_config_dir = os.path.join(xdg_config_home, 'mccm')
 mccm_data_dir = os.path.join(xdg_data_home, 'mccm')
-glade_home = os.path.realpath(os.path.dirname(sys.argv[0]))
-icon_file = os.path.join(glade_home, "mccm_icon.png")
+qtsrc_home = os.path.realpath(os.path.dirname(sys.argv[0]))
+icon_file = os.path.join(qtsrc_home, "mccm_icon.png")
 tips_file = os.path.join(mccm_data_dir, "tips.json")
 conf_file = os.path.join(mccm_config_dir, "mccm.conf")
 cxs_file = os.path.join(mccm_data_dir, "mccm.xml")
-error_dialog = os.path.join(glade_home, "mccm-error-dialog.py")
+error_dialog = os.path.join(qtsrc_home, "mccm-error-dialog.py")
 
-# New Glade Files for GtkBuilder
-glade_home = os.path.join(glade_home, "glade")
-glade_main = os.path.join(glade_home, "main.glade")
-glade_file_utils = os.path.join(glade_home, "file_utils_dialogs.glade")
-glade_http = os.path.join(glade_home, "http.glade")
-glade_preferences = os.path.join(glade_home, "preferences.glade")
-glade_new_cx = os.path.join(glade_home, "new_connection.glade")
-glade_edit_cx = os.path.join(glade_home, "edit_connections.glade")
-glade_import = os.path.join(glade_home, "import_progress.glade")
-glade_tips = os.path.join(glade_home, "tips.glade")
+#
+qtsrc_home = os.path.join(qtsrc_home, "qtsrc")
+qtsrc_main = os.path.join(qtsrc_home, "main.py")
+qtsrc_file_utils = os.path.join(qtsrc_home, "file_utils_dialogs.py")
+qtsrc_http = os.path.join(qtsrc_home, "http.py")
+qtsrc_preferences = os.path.join(qtsrc_home, "preferences.py")
+qtsrc_new_cx = os.path.join(qtsrc_home, "new_connection.py")
+qtsrc_edit_cx = os.path.join(qtsrc_home, "edit_connections.py")
+qtsrc_import = os.path.join(qtsrc_home, "import_progress.py")
+qtsrc_tips = os.path.join(qtsrc_home, "tips.py")
 
 # ----------------------------------------------------------------------
 # i18n stuff

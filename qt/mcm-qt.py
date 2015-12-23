@@ -23,7 +23,6 @@ import common.constants
 
 from qt.qt.mainwindow import *
 from qt.widgets_2 import *
-#from .mccmvnc import MccmVncClient
 
 
 class Mccmqt(QtWidgets.QMainWindow):

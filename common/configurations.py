@@ -26,7 +26,7 @@ Configuration Loading for file ~/.mccm
 import configparser
 import os
 from . import constants
-
+from PyQt5.QtWidgets import QFontDialog
 
 class MccmConfig(object):
 
@@ -129,10 +129,10 @@ class MccmConfig(object):
     def get_font(self):
         try:
             conf = self.get_console_config()
-            return self._fonts.get(conf)
+            return QFontDialog.getFont(conf)
             #return pango.FontDescription(conf['font.type'])
         except KeyError:
-            return self._fonts.get()
+            return QFontDialog.setFont(QFont="Liberation Sans")
             #return pango.FontDescription("Monospace 10")
 
     def get_word_chars(self):
