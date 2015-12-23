@@ -20,9 +20,8 @@
 #
 
 import os
-#from common.configurations import mccmConfig
-#from configurations import mccmConfig
-#from constants import *
+from common.configurations import MccmConfig
+from common.constants import *
 from common.constants import *
 
 class Connection(object):
@@ -109,7 +108,7 @@ class Ssh(Connection):
         return "%s@%s" % (self.user, self.host)
 
     def conn_args(self):
-        conf = McmConfig()
+        conf = MccmConfig()
         post_cmd_args = "; python %s $? ssh \"%s\" 2> /dev/null; exit \n" % (error_dialog, connection_error)
         self.client, not_used = conf.get_ssh_conf()
         return self.cx_args(self.client, self.hostname(), "-p", self.port, self.options, post_cmd_args)
@@ -122,7 +121,7 @@ class Ssh(Connection):
         a_list = self.scp_args()
         return self.list_to_string(a_list)
 
-    def gtk_cmd(self):
+    def qt_cmd(self):
         a_list = self.conn_args()
         return self.list_to_string(a_list)
 
@@ -133,12 +132,12 @@ class Vnc(Connection):
         return "%s:%s" % (self.host, self.port)
 
     def conn_args(self):
-        conf = McmConfig()
+        conf = MccmConfig()
         post_cmd_args = "; python %s $? vnc \"%s\" 2> /dev/null; exit \n" % (error_dialog, connection_error)
         self.client, options, embedded = conf.get_vnc_conf()
         return self.cx_args(self.client, self.options, self.vnchost(), post_cmd_args)
 
-    def gtk_cmd(self):
+    def qt_cmd(self):
         a_list = self.conn_args()
         return self.list_to_string(a_list)
 
@@ -146,12 +145,12 @@ class Vnc(Connection):
 class Rdp(Connection):
 
     def conn_args(self):
-        conf = McmConfig()
+        conf = MccmConfig()
         post_cmd_args = "; python %s $? rdp \"%s\" 2> /dev/null; exit \n" % (error_dialog, connection_error)
         self.client, not_used = conf.get_rdp_conf()
         return self.cx_args(self.client, self.options, self.host, post_cmd_args)
 
-    def gtk_cmd(self):
+    def qt_cmd(self):
         a_list = self.conn_args()
         return self.list_to_string(a_list)
 
@@ -159,12 +158,12 @@ class Rdp(Connection):
 class Telnet(Connection):
 
     def conn_args(self):
-        conf = McmConfig()
+        conf = MccmConfig()
         post_cmd_args = "; python %s $? telnet \"%s\" 2> /dev/null; exit \n" % (error_dialog, connection_error)
         self.client, not_used = conf.get_telnet_conf()
         return self.cx_args(self.client, self.options, self.host, self.port, post_cmd_args)
 
-    def gtk_cmd(self):
+    def qt_cmd(self):
         a_list = self.conn_args()
         return self.list_to_string(a_list)
 
@@ -172,12 +171,12 @@ class Telnet(Connection):
 class Ftp(Connection):
 
     def conn_args(self):
-        conf = McmConfig()
+        conf = MccmConfig()
         post_cmd_args = "; python %s $? ftp \"%s\" 2> /dev/null; exit \n" % (error_dialog, connection_error)
         self.client, not_used = conf.get_ftp_conf()
         return self.cx_args(self.client, self.options, '-u', self.user, '-p', self.port, self.host, post_cmd_args)
 
-    def gtk_cmd(self):
+    def qt_cmd(self):
         a_list = self.conn_args()
         return self.list_to_string(a_list)
 
