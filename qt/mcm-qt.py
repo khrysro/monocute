@@ -10,7 +10,7 @@ import PyQt5
 import logging
 import os
 import sys
-import pexpect #import vte
+import pexpect
 import webbrowser
 import gettext
 import locale
@@ -33,6 +33,8 @@ class Mccmqt(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.dao = Dao()
         self.connections = self.dao.read_xml()
+        menubar = QToolBar("mytoolbar")
+        self.addToolBar(menubar)
 
 
     def about_event(self, widget):
@@ -149,7 +151,7 @@ class Mccmqt(QtWidgets.QMainWindow):
                 if embedded:
                     return self.vnc_connect(connection)
 
-        # Not VNC continue 
+        # Not VNC continue
         scroll = QScrollArea()#ScrolledWindow()
         # By setting the POLICY_AUTOMATIC, the ScrollWindow resizes itself when hidding the TreeView
         scroll.setVerticalScrollBarPolicy(None) #set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_ALWAYS)
@@ -356,7 +358,7 @@ class Mccmqt(QtWidgets.QMainWindow):
             return None
         alias = model.get_value(iter, 0)
         return alias
- 
+
     def feedback_event(self, widget):
         webbrowser.open_new_tab(constants.google_feedback_form_url)
 

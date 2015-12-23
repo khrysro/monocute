@@ -21,7 +21,7 @@
 #
 
 '''
-A simple error dialog for MCM output. Captures the exit code
+A simple error dialog for MCCM output. Captures the exit code
 of an app and shows a dialog with the error if there was an
 abnormal (not 0) exit. Also needs the error string to show.
 '''

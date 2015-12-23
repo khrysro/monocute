@@ -17,33 +17,15 @@
 # with the monocute Connection Manager. If not, see
 # <http://www.gnu.org/licenses/>.
 #
-import sys
-import PyQt5
-from qt.qt.about_mccm import *
-from qt.qt.dialog_preferences import *
-#from qt.dialog_ask import *
-from qt.qt.edit_connections_dialog import *
-from qt.qt.import_progress import *
-from qt.qt.import_progress import *
-from PyQt5.QtWidgets import *
-from common.connections import * #  ccm.common.connections import *
-from common.utils import *
-from common.configurations import MccmConfig
-import common.constants
 
-class connect_par(QtWidgets.QDialog):
-    def __init__(self, parent=None):
-        QtWidgets.QWidget.__init__(self, parent)
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self)
-        self.ui.comboBox_conn_type.activated['QString'].connect(self.connetion_type)
-
-#import gtk
-#import Qt5
+import gtk
 #import pygtk
 #pygtk.require("2.0")
 
-
+from mccm.common.connections import *
+from mccm.common.utils import *
+from mccm.common.configurations import McmConfig
+import mccm.common.constants
 
 '''
 Dialogs for monocute Connections Manager
@@ -56,39 +38,29 @@ class UtilityDialogs(object):
     """
 
     def __init__(self):
-        self.errorMessageDialog = QErrorMessage(self)
         pass
 
     def show_question_dialog(self, title, message):
         """Display a Warning Dialog and return the response to the caller"""
-        dialog = QMessageBox.question(self, title, message, QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
-        dialog = QMessageBox() #(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL, title)
-        '''
-        dialog.setText(message) # format_secondary_text(message)
-        dialog.addButton(QPushButton('Accept'), QMessageBox.YesRole)
-        dialog.addButton(QPushButton('Cancel'), QMessageBox.RejectRole)'''
-        response = dialog #.exec_() #dialog.run()
-        #dialog.destroy()
+        dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL, title)
+        dialog.format_secondary_text(message)
+        response = dialog.run()
+        dialog.destroy()
         return response
 
     def show_error_dialog(self, title, message):
         """Display an error dialog to the user"""
-        self.errorMessageDialog.showMessage(message)
-        #self.show_common_dialog(title, message, QErrorMessage)
+        self.show_common_dialog(title, message, gtk.MESSAGE_ERROR)
 
     def show_info_dialog(self, title, message):
         """Display an error dialog to the user"""
-        QMessageBox.information(self, title, message)
-        #self.show_common_dialog(title, message, QStaticText)
+        self.show_common_dialog(title, message, gtk.MESSAGE_INFO)
 
     def show_common_dialog(self, title, message, icon):
-        dialog = QMessageBox()
-        dialog.setInformativeText(message)
-        '''
         dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, icon, gtk.BUTTONS_OK, title)
         dialog.format_secondary_text(message)
         dialog.run()
-        dialog.destroy()'''
+        dialog.destroy()
 
 
 class AddConnectionDialog(object):
@@ -174,7 +146,7 @@ class AddConnectionDialog(object):
 
     def insert_default_options(self, widget):
         type = widget.get_active_text()
-        conf = MccmConfig()
+        conf = McmConfig()
         config = ""
         if type == 'SSH':
             not_used, config = conf.get_ssh_conf()
@@ -347,8 +319,8 @@ class PreferencesDialog(object):
             'buffer_hscale': self.builder.get_object('buffer-hscale'),
             'chk_bg_transparent': self.builder.get_object('chk_bg_transparent'),
             'transparency_hscale': self.builder.get_object('transparency-hscale'),
-            'bgimage_filechooserbutton': self.builder.get_object('bgimage_filechooserbutton'),
-            'bg_colorbutton': self.builder.get_object('bg_colorbutton'),
+            'bgimage_filechooserbutton': self.builder.get_object('bgimage-filechooserbutton'),
+            'bg_colorbutton': self.builder.get_object('bg-colorbutton'),
             'clear_bg': self.builder.get_object('clear_image_button'),
             # Connections
             'ssh_options_entry': self.builder.get_object('ssh_default_options_entry'),
@@ -448,7 +420,7 @@ class PreferencesDialog(object):
         e2.set_text(options)
 
     def fill_console(self):
-        conf = MccmConfig()
+        conf = McmConfig()
         widget = self.widgets['fg_colorbutton']
         widget.set_color(gtk.gdk.color_parse(conf.get_fg_color()))
         widget = self.widgets['fontbutton']
@@ -469,7 +441,7 @@ class PreferencesDialog(object):
         widget.set_value(conf.get_buffer_size())
 
     def save_connections_config(self):
-        conf = MccmConfig()
+        conf = McmConfig()
         cfg = conf.get_connections_config()
         #SSH
         cfg['ssh.client'] = self.widgets['ssh_entry'].get_text()
@@ -490,7 +462,7 @@ class PreferencesDialog(object):
         conf.save_connections_config(cfg)
 
     def save_console_config(self):
-        conf = MccmConfig()
+        conf = McmConfig()
         cfg = conf.get_console_config()
 
         color = self.widgets['fg_colorbutton'].get_color()
@@ -539,7 +511,7 @@ class PreferencesDialog(object):
         self.dlg.run()
 
 
-class MccmCheckbox(QHBoxLayout):
+class McmCheckbox(gtk.HBox):
 
     def __init__(self, title):
         gtk.HBox.__init__(self, False)
@@ -570,7 +542,7 @@ class MccmCheckbox(QHBoxLayout):
         return self._current_alias
 
 
-class MccmNewTipDialog(object):
+class McmNewTipDialog(object):
 
     def __init__(self):
         self.response = gtk.RESPONSE_CANCEL
@@ -626,21 +598,21 @@ class MccmNewTipDialog(object):
         response = dlg.show_info_dialog(constants.send_world, constants.google_docs_disclaimer)
 
 
-class MccmMenu(QMenu):
+class McmMenu(gtk.Menu):
 
     def __init__(self, label):
         gtk.Menu.__init__(self)
         self.label = label
 
-'''
+
 class TipGtkMenuItem(gtk.MenuItem):
 
     def __init__(self, label, tip):
         gtk.MenuItem.__init__(self, label)
         self.tip = tip
-'''
 
-class MccmTipsWidget(object):
+
+class McmTipsWidget(object):
 
     def __init__(self, hbox):
         self.tips = Tips()
@@ -667,7 +639,7 @@ class MccmTipsWidget(object):
     def entry_icon_event(self, widget, icon, event):
         # Using 'event.button' I can know which mouse button was used
         if icon.value_name == "GTK_ENTRY_ICON_PRIMARY":
-            print("To Console")
+            print "To Console"
         elif icon.value_name == "GTK_ENTRY_ICON_SECONDARY":
             new_tip_dialog = McmNewTipDialog()
             new_tip_dialog.run()
@@ -824,22 +796,40 @@ class ManageConnectionsDialog(object):
 
         return view
 
+    def generate_columns(self, store):
+        columns = []
 
+        renderer0 = gtk.CellRendererText()
+        renderer0.set_property( 'editable', True)
+        renderer0.connect('edited', self.cell_edited_event, store )
+        img_renderer = gtk.CellRendererPixbuf()
+        
+        columns.append(gtk.TreeViewColumn("Alias", renderer0, text=0))
+        columns.append(gtk.TreeViewColumn("Type", renderer0, text=1))
+        columns.append(gtk.TreeViewColumn("Group", renderer0, text=8))
+        columns.append(gtk.TreeViewColumn("Username", renderer0, text=5))
+        columns.append(gtk.TreeViewColumn("Host", renderer0, text=3))
+        columns.append(gtk.TreeViewColumn("Port", renderer0, text=4))
+        columns.append(gtk.TreeViewColumn("Options", renderer0, text=7))
+        columns.append(gtk.TreeViewColumn("Description", renderer0, text=9))
+        columns.append(gtk.TreeViewColumn("Password", renderer0, text=6))
+        columns.append(gtk.TreeViewColumn("Delete", img_renderer, pixbuf=10))
+
+        return columns
 
     def connections_model(self):
         """Creates a ListStore with the Connections data"""
-        store = QStringListModel(str, str, str, str, str, str, str, str, str, str, ) # gtk.gdk.Pixbuf)
-        '''img = self.dialog.render_icon(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
+        store = gtk.ListStore(str, str, str, str, str, str, str, str, str, str, gtk.gdk.Pixbuf)
+        img = self.dialog.render_icon(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
 
-        for cx in list(self.connections.values()):
+        for cx in self.connections.values():
             cx_list = cx.to_list()
             cx_list.append(img)
             store.append(cx_list)
-        return store '''
-'''
+        return store
+
 class HttpServerDialog(object):
     def __init__(self):
-
         builder = gtk.Builder()
         builder.add_from_file(constants.glade_http)
         self.dialog = builder.get_object("http_server_dialog")
@@ -856,7 +846,7 @@ class HttpServerDialog(object):
 
     def stop_server(self):
         pass
-'''
+
 class DefaultColorSettings(object):
     def __init__(self):
         def_settings = gtk.settings_get_default()

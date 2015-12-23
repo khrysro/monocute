@@ -18,13 +18,15 @@
 # <http://www.gnu.org/licenses/>.
 #
 
-import gtk
+#import gtk
+#import Qt5
+import PyQt5
 #import pygtk
 #pygtk.require("2.0")
 
 from mccm.common.connections import *
 from mccm.common.utils import *
-from mccm.common.configurations import McmConfig
+from mccm.common.configurations import MccmConfig
 import mccm.common.constants
 
 '''
@@ -42,7 +44,7 @@ class UtilityDialogs(object):
 
     def show_question_dialog(self, title, message):
         """Display a Warning Dialog and return the response to the caller"""
-        dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL, title)
+        dialog = Qt.QMessageBox(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL, title)
         dialog.format_secondary_text(message)
         response = dialog.run()
         dialog.destroy()

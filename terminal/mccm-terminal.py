@@ -68,7 +68,7 @@ class Mccm(object):
             print("Unknown alias " + alias)
 
     def export_html(self, path):
-        from mccm.common.export import Html
+        from common.export import Html
         html = Html(path, constants.version, self.dao.read_xml()) 
         html.export()
 
@@ -241,7 +241,7 @@ class Mccm(object):
         exit(0)
 
     def import_csv(self, path):
-        from mccm.common.utils import Csv
+        from common.utils import Csv
         _csv = Csv(path)
         cxs = _csv.do_import()
         self.add(cxs)

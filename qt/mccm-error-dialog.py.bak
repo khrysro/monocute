@@ -33,7 +33,7 @@ import PyQt5
 #import pygtk
 #pygtk.require("2.0")
 
-from widgets import UtilityDialogs
+#from widgets import UtilityDialogs
 from PyQt5.QtWidgets import QApplication, QDialog
 
 class MccmErrorDialog(object):
@@ -72,5 +72,5 @@ if __name__ == '__main__':
             dlg.draw()
 
     else:
-        print(("unkown %s" % app))
+        print ("unkown %s" % app)
         exit(exit_code)

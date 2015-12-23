@@ -42,15 +42,16 @@ class UtilityDialogs(QDialog):
 
      def show_question_dialog(self, title, message):
         """Display a Warning Dialog and return the response to the caller"""
-        dialog = QMessageBox.question(self,QDialog,QMessageBox_StandardButtons_buttons=) #(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL, title)
-
-        dialog.setText(message) # format_secondary_text(message)
-        dialog.addButton(QPushButton('Accept'), QMessageBox.YesRole)
-        dialog.addButton(QPushButton('Cancel'), QMessageBox.RejectRole)
-        response = dialog.exec_() #dialog.run()
-
-        dialog.destroy()
-        return response
+        dialog = QMessageBox.question(self, title, message, QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+        '''dialog.setText(title) # format_secondary_text(message)
+        dialog.setInformativeText(message)
+        dialog.setStandardButtons(QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
+        #dialog.addButton(QPushButton('Accept'), QMessageBox.YesRole)
+        #dialog.addButton(QPushButton('Cancel'), QMessageBox.RejectRole)
+        dialog.setDefaultButton(QMessageBox.Cancel)'''
+        #response = dialog.exec_()
+        #dialog        dialog.destroy()
+        return dialog # response
 
 
 class MainWindow(QMainWindow):
@@ -71,7 +72,7 @@ class MainWindow(QMainWindow):
 
     def onMyToolbarClick(self, s):
         print("click", s)
-        dlg = UtilityDialogs.show_question_dialog(self, "pregunta","quieres una pregunta?")
+        dlg = UtilityDialogs.show_question_dialog(self, "pregunta","quieres una pregunta?" )
 
         #dlg.exec_()
 

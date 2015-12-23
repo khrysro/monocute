@@ -25,11 +25,10 @@ Configuration Loading for file ~/.mccm
 
 import configparser
 import os
-#import pango
 from . import constants
 
 
-class mccmConfig(object):
+class MccmConfig(object):
 
     def __init__(self):
         self.config = configparser.SafeConfigParser()
@@ -133,7 +132,7 @@ class mccmConfig(object):
             return self._fonts.get(conf)
             #return pango.FontDescription(conf['font.type'])
         except KeyError:
-            return self._fonts.get(name)
+            return self._fonts.get()
             #return pango.FontDescription("Monospace 10")
 
     def get_word_chars(self):
