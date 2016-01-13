@@ -2,12 +2,13 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Wed Dec 23 19:43:03 2015
+# Created: Thu Jan  7 10:26:56 2016
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -116,23 +117,21 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         MainWindow.setCentralWidget(self.centralWidget)
-        self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 481, 25))
-        self.menuBar.setObjectName("menuBar")
-        self.menuFile = QtWidgets.QMenu(self.menuBar)
+        self.Main_menuBar = QtWidgets.QMenuBar(MainWindow)
+        self.Main_menuBar.setGeometry(QtCore.QRect(0, 0, 481, 25))
+        self.Main_menuBar.setAcceptDrops(False)
+        self.Main_menuBar.setObjectName("Main_menuBar")
+        self.menuFile = QtWidgets.QMenu(self.Main_menuBar)
         self.menuFile.setObjectName("menuFile")
-        self.menuView = QtWidgets.QMenu(self.menuBar)
+        self.menuView = QtWidgets.QMenu(self.Main_menuBar)
         self.menuView.setObjectName("menuView")
-        self.menuConnections = QtWidgets.QMenu(self.menuBar)
+        self.menuConnections = QtWidgets.QMenu(self.Main_menuBar)
         self.menuConnections.setObjectName("menuConnections")
-        self.menuTools = QtWidgets.QMenu(self.menuBar)
+        self.menuTools = QtWidgets.QMenu(self.Main_menuBar)
         self.menuTools.setObjectName("menuTools")
-        self.menuHelp = QtWidgets.QMenu(self.menuBar)
+        self.menuHelp = QtWidgets.QMenu(self.Main_menuBar)
         self.menuHelp.setObjectName("menuHelp")
-        MainWindow.setMenuBar(self.menuBar)
-        self.mainToolBar = QtWidgets.QToolBar(MainWindow)
-        self.mainToolBar.setObjectName("mainToolBar")
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
+        MainWindow.setMenuBar(self.Main_menuBar)
         self.statusBar = QtWidgets.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
@@ -191,11 +190,11 @@ class Ui_MainWindow(object):
         self.menuHelp.addAction(self.actionFeedbask)
         self.menuHelp.addAction(self.actionHelp)
         self.menuHelp.addAction(self.actionAbout)
-        self.menuBar.addAction(self.menuFile.menuAction())
-        self.menuBar.addAction(self.menuView.menuAction())
-        self.menuBar.addAction(self.menuConnections.menuAction())
-        self.menuBar.addAction(self.menuTools.menuAction())
-        self.menuBar.addAction(self.menuHelp.menuAction())
+        self.Main_menuBar.addAction(self.menuFile.menuAction())
+        self.Main_menuBar.addAction(self.menuView.menuAction())
+        self.Main_menuBar.addAction(self.menuConnections.menuAction())
+        self.Main_menuBar.addAction(self.menuTools.menuAction())
+        self.Main_menuBar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

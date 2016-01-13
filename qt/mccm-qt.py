@@ -22,7 +22,7 @@ import common.constants
 #from qt.widgets_2 import *
 from qt.qt.mainwindow import *
 from PyQt5.QtWidgets import *
-
+from PyQt5.QtGui import *
 
 class Mccmqt(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -31,8 +31,8 @@ class Mccmqt(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.dao = Dao()
         self.connections = self.dao.read_xml()
-        menubar = QToolBar("mytoolbar")
-        self.addToolBar(menubar)
+        menubar = QMenuBar()
+        #self.add addToolBar(menubar)
         button_file = QAction("File", self)
         #button_file.triggered.connect(self.onMyToolbarClick)
         menubar.addAction(button_file)
@@ -40,7 +40,7 @@ class Mccmqt(QtWidgets.QMainWindow):
 
 
     def about_event(self, widget):
-        about = self.widgets['about']
+        about = self.actionAbout['about']
         about.connect("response", lambda d, r: d.hide())
         about.run()
 

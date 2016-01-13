@@ -88,9 +88,9 @@ color: #339;
         return header
 
     def get_footer(self):
-        gdate = datetime.today()
+        date = datetime.today()
         return "<h3>Generated %s</h3></body></html>" % \
-               gdate.strftime("%Y/%m/%d %H:%M:%S")
+               date.strftime("%Y/%m/%d %H:%M:%S")
 
     def get_content(self):
         content = """
