@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'about_mccm.ui'
 #
-# Created: Tue Dec 15 13:21:15 2015
+# Created: Tue Jan 19 18:19:50 2016
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,6 +15,7 @@ class Ui_about_mccm(object):
         about_mccm.resize(392, 284)
         about_mccm.setMinimumSize(QtCore.QSize(392, 284))
         about_mccm.setMaximumSize(QtCore.QSize(392, 284))
+        about_mccm.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.gridLayout_2 = QtWidgets.QGridLayout(about_mccm)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.gridLayout = QtWidgets.QGridLayout()
@@ -46,8 +47,20 @@ class Ui_about_mccm(object):
         self.gridLayout_2.addItem(spacerItem, 0, 0, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem1, 0, 2, 1, 1)
+        self.OK_Button = QtWidgets.QPushButton(about_mccm)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.OK_Button.sizePolicy().hasHeightForWidth())
+        self.OK_Button.setSizePolicy(sizePolicy)
+        self.OK_Button.setMinimumSize(QtCore.QSize(100, 25))
+        self.OK_Button.setMaximumSize(QtCore.QSize(100, 25))
+        self.OK_Button.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.OK_Button.setObjectName("OK_Button")
+        self.gridLayout_2.addWidget(self.OK_Button, 2, 1, 1, 1)
 
         self.retranslateUi(about_mccm)
+        self.OK_Button.clicked.connect(about_mccm.accept)
         QtCore.QMetaObject.connectSlotsByName(about_mccm)
 
     def retranslateUi(self, about_mccm):
@@ -58,4 +71,5 @@ class Ui_about_mccm(object):
         self.label.setText(_translate("about_mccm", "Monocute Connections Manager"))
         self.label_2.setText(_translate("about_mccm", "port a Qt de monocaffe connection manager"))
         self.label_4.setText(_translate("about_mccm", "Version 0.0.1"))
+        self.OK_Button.setText(_translate("about_mccm", "OK"))
 

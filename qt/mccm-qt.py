@@ -18,11 +18,30 @@ import locale
 from common.connections import *
 from common.export import *
 from common.utils import *
-import common.constants
+from common.constants import *
 #from qt.widgets_2 import *
 from qt.qt.mainwindow import *
+from qt.qt.about_mccm import *
+from qt.qt.new_connection import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+
+class Myabout_Dialog(QtWidgets.QDialog):
+    def __init__(self, *args, **kwargs):
+        super(Myabout_Dialog, self).__init__(*args, **kwargs)
+        self.ui = Ui_about_mccm()
+        self.setWindowTitle("about")
+        self.ui.setupUi(self)
+
+
+
+class AddConnectionDialog(QtWidgets.QDialog):
+    def __init__(self, *args, **kwargs):
+        super(AddConnectionDialog, self).__init__(*args, **kwargs)
+        self.ui = Ui_new_connection()
+        self.ui.setupUi(self)
+        self.ui.buttonBox.clicked.connect(self.accept)
+
 
 class Mccmqt(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -31,23 +50,25 @@ class Mccmqt(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.dao = Dao()
         self.connections = self.dao.read_xml()
-        menubar = QMenuBar()
-        #self.add addToolBar(menubar)
+        self.ui.actionAbout.triggered.connect(self.About_message)
+        self.ui.actionExit.triggered.connect(self.close)
+        self.ui.actionAdd.triggered.connect(self.add_event)
+
+        '''menubar = QToolBar()
+        self.addToolBar(menubar)
         button_file = QAction("File", self)
         #button_file.triggered.connect(self.onMyToolbarClick)
-        menubar.addAction(button_file)
+        menubar.addAction(button_file)'''
 
+    def About_message(self, widget):
+        aboutDialog = Myabout_Dialog(self)
+        aboutDialog.exec_()
 
-
-    def about_event(self, widget):
-        about = self.actionAbout['about']
-        about.connect("response", lambda d, r: d.hide())
-        about.run()
 
     def add_event(self, widget):
         id = self.get_last_id()
-        dlg = AddConnectionDialog(id, list(self.connections.keys()), groups(self.connections), types(self.connections))
-        dlg.run()
+        dlg = AddConnectionDialog(self) #id, list(self.connections.keys()), groups(self.connections), types(self.connections))
+        dlg.exec_()
         if dlg.response == QMessageBox.AcceptRole:
             cx = dlg.new_connection
             self.connections[cx.alias] = cx
@@ -273,7 +294,7 @@ class Mccmqt(QtWidgets.QMainWindow):
             'on_connect_button_clicked': self.connect_event,
             'on_arrow_button_clicked': self.hide_unhide_tree,
             # Menu Items
-            'on_mb_about_activate': self.about_event,
+           #'on_mb_about_activate': self.about_event,
             'on_mb_help_activate': self.help_event,
             'on_mb_feedback_activate': self.feedback_event,
             'on_mb_preferences_activate': self.preferences_event,
@@ -292,7 +313,7 @@ class Mccmqt(QtWidgets.QMainWindow):
             #'on_mb_http_server_activate': self.http_server,
             'on_mb_edit_activate': self.edit_event,
             # Status Icon Items
-            'on_sib_quit_activate': self.quit_event,
+            #'on_sib_quit_activate': self.quit_event,
             'on_sib_preferences_activate': self.preferences_event,
             'on_sib_add_activate': self.add_event,
             'on_sib_quit_activate': self.quit_event,

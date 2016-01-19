@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>481</width>
-    <height>443</height>
+    <width>555</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -208,8 +208,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>481</width>
-     <height>25</height>
+     <width>555</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="acceptDrops">

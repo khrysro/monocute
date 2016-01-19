@@ -38,11 +38,6 @@ class connect_par(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.ui.comboBox_conn_type.activated['QString'].connect(self.connetion_type)
 
-#import gtk
-#import Qt5
-#import pygtk
-#pygtk.require("2.0")
-
 
 
 '''
@@ -99,8 +94,8 @@ class AddConnectionDialog(object):
         self.default_color = DefaultColorSettings().base_color
         self.new_connection = None
         self.error = None
-        self.builder = gtk.Builder()
-        self.builder.add_from_file(constants.glade_new_cx)
+        #self.builder = gtk.Builder()
+        #self.builder.add_from_file(constants.glade_new_cx)
         self.aliases = aliases
         self.id = id
         self.widgets = {

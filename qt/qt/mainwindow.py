@@ -2,18 +2,17 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Thu Jan  7 10:26:56 2016
+# Created: Thu Jan 14 17:24:00 2016
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(481, 443)
+        MainWindow.resize(555, 520)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralWidget)
@@ -118,7 +117,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         MainWindow.setCentralWidget(self.centralWidget)
         self.Main_menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.Main_menuBar.setGeometry(QtCore.QRect(0, 0, 481, 25))
+        self.Main_menuBar.setGeometry(QtCore.QRect(0, 0, 555, 21))
         self.Main_menuBar.setAcceptDrops(False)
         self.Main_menuBar.setObjectName("Main_menuBar")
         self.menuFile = QtWidgets.QMenu(self.Main_menuBar)

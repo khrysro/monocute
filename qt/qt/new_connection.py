@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'new_connection.ui'
 #
-# Created: Tue Dec 15 13:23:54 2015
+# Created: Tue Jan 19 18:49:42 2016
 #      by: PyQt5 UI code generator 5.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_new_connection(object):
     def setupUi(self, new_connection):
         new_connection.setObjectName("new_connection")
-        new_connection.resize(400, 300)
+        new_connection.resize(400, 363)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(new_connection)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -86,6 +86,10 @@ class Ui_new_connection(object):
         self.formLayout_2.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.password_entry1)
         self.verticalLayout_2.addLayout(self.formLayout_2)
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
+        self.buttonBox = QtWidgets.QDialogButtonBox(new_connection)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.verticalLayout_3.addWidget(self.buttonBox)
 
         self.retranslateUi(new_connection)
         QtCore.QMetaObject.connectSlotsByName(new_connection)
