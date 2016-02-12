@@ -24,8 +24,8 @@ Script to add new connections to mccm
 '''
 
 from optparse import OptionParser
-from mccm.common.connections import *
-from mccm.common.utils import *
+from common.connections import *
+from common.utils import *
 
 if __name__ == '__main__':
     parser = OptionParser(usage="%prog -a ALIAS -t [SSH|TELNET|FTP|RDP|VNC] -g GROUP -u USER -p PASSWORD -P PORT -H HOST -o OPTIONS -d DESCRIPTION\nexample:\n %prog -a test -g test_grp -o \"-X -L\"", version="%prog 0.9")
@@ -44,7 +44,8 @@ if __name__ == '__main__':
     dao = Dao()
     connections = dao.read_xml()
     if connections != None:
-        if connections.has_key(options.alias):
+        #if connections.has_key(options.alias):
+        if options.alias in connections:
             raise AttributeError("This alias is already used. Try with another one")
 
     cx = connections_factory(get_last_id(connections), options.type, options.user, options.host, options.alias, options.password, options.port, options.group, options.options, options.description)
