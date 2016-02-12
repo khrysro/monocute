@@ -25,7 +25,7 @@ Configuration Loading for file ~/.mccm
 
 import configparser
 import os
-from . import constants
+import common.constants
 from PyQt5.QtWidgets import QFontDialog
 
 class MccmConfig(object):
