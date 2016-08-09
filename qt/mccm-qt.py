@@ -53,6 +53,7 @@ class Mccmqt(QtWidgets.QMainWindow):
         self.ui.actionAbout.triggered.connect(self.About_message)
         self.ui.actionExit.triggered.connect(self.close)
         self.ui.actionAdd.triggered.connect(self.add_event)
+        self.ui.actionEdit.triggered.connect(self.edit_event)
 
         '''menubar = QToolBar()
         self.addToolBar(menubar)
@@ -69,7 +70,7 @@ class Mccmqt(QtWidgets.QMainWindow):
         id = self.get_last_id()
         dlg = AddConnectionDialog(self) #id, list(self.connections.keys()), groups(self.connections), types(self.connections))
         dlg.exec_()
-        if dlg.response == QMessageBox.AcceptRole:
+        if dlg.result == QMessageBox.AcceptRole:
             cx = dlg.new_connection
             self.connections[cx.alias] = cx
             self.draw_tree()
