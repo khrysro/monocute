@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Thu Jan 14 17:24:00 2016
-#      by: PyQt5 UI code generator 5.2.1
+# Created by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -29,17 +28,21 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.groupBox = QtWidgets.QGroupBox(self.frame)
         self.groupBox.setObjectName("groupBox")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.groupBox)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.scrollArea = QtWidgets.QScrollArea(self.groupBox)
-        self.scrollArea.setGeometry(QtCore.QRect(0, 20, 221, 151))
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 219, 149))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 265, 122))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.treeView = QtWidgets.QTreeView(self.scrollAreaWidgetContents_3)
-        self.treeView.setGeometry(QtCore.QRect(0, 0, 221, 141))
         self.treeView.setObjectName("treeView")
+        self.verticalLayout_3.addWidget(self.treeView)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_3)
+        self.horizontalLayout_3.addWidget(self.scrollArea)
         self.horizontalLayout_5.addWidget(self.groupBox)
         self.verticalLayout.addWidget(self.frame)
         self.frame_2 = QtWidgets.QFrame(self.centralWidget)
@@ -117,7 +120,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         MainWindow.setCentralWidget(self.centralWidget)
         self.Main_menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.Main_menuBar.setGeometry(QtCore.QRect(0, 0, 555, 21))
+        self.Main_menuBar.setGeometry(QtCore.QRect(0, 0, 555, 24))
         self.Main_menuBar.setAcceptDrops(False)
         self.Main_menuBar.setObjectName("Main_menuBar")
         self.menuFile = QtWidgets.QMenu(self.Main_menuBar)
@@ -234,4 +237,14 @@ class Ui_MainWindow(object):
         self.actionEdit.setText(_translate("MainWindow", "Edit"))
         self.actionHome.setText(_translate("MainWindow", "Home"))
         self.actionHTTP_Server.setText(_translate("MainWindow", "HTTP Server"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
 
