@@ -120,8 +120,8 @@ class Mccmqt(QtWidgets.QMainWindow):
             term.feed_child(key)
         return True
 
-    def connect_event(self, widget, path=None, vew_column=None):
-        alias = None
+    #def connect_event(self, widget, path=None, vew_column=None):
+     #   alias = None
         #name = gtk.Buildable.get_name(widget)
 
         #if name == 'connect_button' or name == 'mb_connect' or name == 'connections_tree':

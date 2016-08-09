@@ -47,6 +47,9 @@ def get_last_id(connections):
         _max = max(a_list)
     except ValueError:
         _max = 0
+
+    except AttributeError:
+        _max = 0
     _max += 1
     return str(_max)
 
@@ -59,7 +62,7 @@ class Dao(object):
     def read_xml(self):
         dom = minidom.parse(self.xmlfile)
         root = dom.firstChild
-        return self.parse_connections_from_xml(root)
+        #return self.parse_connections_from_xml(root)
 
     def save_to_xml(self, connections):
         doc = Document()
@@ -82,7 +85,7 @@ class Dao(object):
         xml_w = open(self.xmlfile, 'w')
         doc.writexml(xml_w, "  ", "  ", "\n", "UTF-8")
         xml_w.close()
-
+'''
     def parse_connections_from_xml(self, root):
         cons_nodes = root.getElementsByTagName('connection')
         connections = {}
@@ -103,7 +106,7 @@ class Dao(object):
         return connections
 
     def get_node_value_by_name(self, node, node_name):
-        '''Many elements are unique, but don't use this one for elements that aren't unique'''
+        #Many elements are unique, but don't use this one for elements that aren't unique
         node_list = node.getElementsByTagName(node_name)
 
         if len(node_list) == 0:
@@ -111,7 +114,7 @@ class Dao(object):
 
         node = node_list[0]
         return node.firstChild.nodeValue.strip()
-
+'''
 
 class Csv(object):
 

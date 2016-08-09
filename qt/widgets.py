@@ -148,7 +148,7 @@ class AddConnectionDialog(object):
 
     def insert_default_options(self, widget):
         type = widget.get_active_text()
-        conf = McmConfig()
+        conf = MccmConfig()
         config = ""
         if type == 'SSH':
             not_used, config = conf.get_ssh_conf()
