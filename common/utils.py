@@ -62,7 +62,7 @@ class Dao(object):
     def read_xml(self):
         dom = minidom.parse(self.xmlfile)
         root = dom.firstChild
-        #return self.parse_connections_from_xml(root)
+        return self.parse_connections_from_xml(root)
 
     def save_to_xml(self, connections):
         doc = Document()
@@ -85,7 +85,7 @@ class Dao(object):
         xml_w = open(self.xmlfile, 'w')
         doc.writexml(xml_w, "  ", "  ", "\n", "UTF-8")
         xml_w.close()
-'''
+
     def parse_connections_from_xml(self, root):
         cons_nodes = root.getElementsByTagName('connection')
         connections = {}
@@ -114,7 +114,7 @@ class Dao(object):
 
         node = node_list[0]
         return node.firstChild.nodeValue.strip()
-'''
+
 
 class Csv(object):
 
