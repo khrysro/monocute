@@ -49,7 +49,15 @@ class Mccmqt(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.dao = Dao()
-        self.connections = self.dao.read_xml()
+        try:
+            self.connections = self.dao.read_xml()
+        except:
+            times=None
+            fhandle = open(constants.cxs_file, 'a')
+            try:
+                os.utime(constants.cxs_file, times)
+            finally:
+                fhandle.close()
         self.ui.actionAbout.triggered.connect(self.About_message)
         self.ui.actionExit.triggered.connect(self.close)
         self.ui.actionAdd.triggered.connect(self.add_event)
