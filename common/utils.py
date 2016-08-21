@@ -66,8 +66,8 @@ class Dao(object):
 
     def save_to_xml(self, connections):
         doc = Document()
-        mcm_node = doc.createElement('mcm')
-        doc.appendChild(mcm_node)
+        mccm_node = doc.createElement('mccm')
+        doc.appendChild(mccm_node)
 
         if connections is not None:
             cons_node = doc.createElement('connections')
@@ -81,7 +81,7 @@ class Dao(object):
                     cx_node.appendChild(cx_id)
                 cons_node.appendChild(cx_node)
 
-            mcm_node.appendChild(cons_node)
+            mccm_node.appendChild(cons_node)
         xml_w = open(self.xmlfile, 'w')
         doc.writexml(xml_w, "  ", "  ", "\n", "UTF-8")
         xml_w.close()
